@@ -1,0 +1,19 @@
+{
+  "name": "classy-components",
+  "version": "1.0.0",
+  "description": "Creates React components with specified CSS classes",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/casieber/classy-components.git"
+  },
+  "author": "Colby Sieber",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/casieber/classy-components/issues"
+  },
+  "homepage": "https://github.com/casieber/classy-components#readme"
+}
