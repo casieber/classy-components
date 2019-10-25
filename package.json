@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/casieber/classy-components/issues"
   },
-  "homepage": "https://github.com/casieber/classy-components#readme"
+  "homepage": "https://github.com/casieber/classy-components#readme",
+  "devDependencies": {
+    "@types/react": "^16.9.10",
+    "@types/react-dom": "^16.9.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "typescript": "^3.6.4"
+  }
 }
