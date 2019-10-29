@@ -1,5 +1,4 @@
-# <🎩>
-# classy components
+# Classy Components <🎩>
 
 inspired by [styled components][styled]
 
