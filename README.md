@@ -1,6 +1,6 @@
 # Classy Components <🎩>
 
-inspired by [styled components][styled]
+inspired by [styled components](https://www.styled-components.com/)
 
 Classy Components creates React components that have certain CSS classes.
 
@@ -30,7 +30,7 @@ yarn add classy-components
 ## Usage
 Using template literals, you can spread a list of classes over many lines.
 This comes in useful when you're using some CSS framework like
-[Tailwind CSS][tailwindcss].
+[Tailwind CSS](https://tailwindcss.com/).
 
 ```javascript
 const Toolbar = classy.button`
