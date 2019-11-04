@@ -5,11 +5,16 @@ import { mergeProps, templateInterleave } from './utils';
 type BaseTag = typeof domElements[number];
 type PropForTag<TTag extends BaseTag> = JSX.IntrinsicElements[TTag];
 type ComponentForTag<TTag extends BaseTag> = ( props: PropForTag<TTag> ) => React.ReactElement<PropForTag<TTag>>;
-type ClassyComponent<TTag extends BaseTag> = ( strings: TemplateStringsArray, ...placeholders: string[] ) => ComponentForTag<TTag>;
+type ClassyBaseComponent<TTag extends BaseTag> = ClassyComponent<PropForTag<TTag>>;
 
-type Classy = { [T in BaseTag]: ClassyComponent<T> };
+type ClassyComponent<TProps> = ( strings: TemplateStringsArray, ...placeholders: string[] ) => React.ComponentType<TProps>;
 
-function makeTemplateForComponent<T extends BaseTag>( tag: T ): ClassyComponent<T> {
+type ExpectedProps = { className?: string; children?: React.ReactNode; };
+type ClassyFn = <TProps extends ExpectedProps, TComp extends React.ComponentType<TProps>>( component: TComp ) => ClassyComponent<TProps>;
+
+type Classy = {	[T in BaseTag]: ClassyBaseComponent<T> } & ClassyFn;
+
+function makeTemplateForComponent<T extends BaseTag>( tag: T ): ClassyBaseComponent<T> {
 	return ( strings: TemplateStringsArray, ...placeholders: string[] ): ComponentForTag<T> => {
 		const tailwindClass = templateInterleave( strings, ...placeholders );
 
@@ -22,7 +27,18 @@ function makeClassy(): Classy {
 
 	domElements.forEach( <T extends BaseTag>( tag: T ) => intermediate[tag] = makeTemplateForComponent( tag ) );
 
-	return intermediate as Classy;
+	const classyFn = <TProps extends ExpectedProps, TComp extends React.ComponentType<TProps>>( component: TComp ) => {
+		return ( strings: TemplateStringsArray, ...placeholders: string[] ) => {
+			const tailwindClass = templateInterleave( strings, ...placeholders );
+
+			return ( props: TProps ) => React.createElement( component, mergeProps( props, tailwindClass ), props.children );
+		}
+	};
+
+	return Object.assign(
+		classyFn,
+		intermediate,
+	) as Classy;
 }
 
 const classy = makeClassy();
