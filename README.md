@@ -43,3 +43,23 @@ const Toolbar = classy.button`
 	rounded
 `;
 ```
+
+You can also create classy components out of arbitrary React components by calling `classy` as a function:
+
+```javascript
+import { MyComponent } from './components';
+import classy from 'classy-components';
+
+const WrappedComponent = classy( MyComponent )`bg-blue-500`;
+```
+
+This also allows you to compose multiple classy components:
+
+```javascript
+import classy from 'classy-components';
+
+const Box = classy`bordered rounded`;
+
+const RedBox = classy( Box )`bg-red-500`;
+const BlueBox = classy( Box )`bg-blue-500`;
+```
