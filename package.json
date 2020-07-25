@@ -1,6 +1,6 @@
 {
   "name": "classy-components",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Creates React components with specified CSS classes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
