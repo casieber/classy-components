@@ -10,7 +10,7 @@ type ClassyBaseComponent<TTag extends BaseTag> = ClassyComponent<PropForTag<TTag
 type ClassyComponent<TProps> = ( strings: TemplateStringsArray, ...placeholders: string[] ) => React.ComponentType<TProps>;
 
 type ExpectedProps = { className?: string; children?: React.ReactNode; };
-type ClassyFn = <TProps extends ExpectedProps, TComp extends React.ComponentType<TProps>>( component: TComp ) => ClassyComponent<TProps>;
+type ClassyFn = <TProps extends ExpectedProps>( component: React.ComponentType<TProps> ) => ClassyComponent<TProps>;
 
 type Classy = {	[T in BaseTag]: ClassyBaseComponent<T> } & ClassyFn;
 
@@ -27,7 +27,7 @@ function makeClassy(): Classy {
 
 	domElements.forEach( <T extends BaseTag>( tag: T ) => intermediate[tag] = makeTemplateForComponent( tag ) );
 
-	const classyFn = <TProps extends ExpectedProps, TComp extends React.ComponentType<TProps>>( component: TComp ) => {
+	const classyFn =  <TProps extends ExpectedProps>( component: React.ComponentType<TProps> ) => {
 		return ( strings: TemplateStringsArray, ...placeholders: string[] ) => {
 			const tailwindClass = templateInterleave( strings, ...placeholders );
 
